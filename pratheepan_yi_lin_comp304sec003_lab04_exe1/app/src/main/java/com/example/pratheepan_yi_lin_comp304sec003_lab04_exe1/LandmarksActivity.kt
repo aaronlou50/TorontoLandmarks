@@ -5,29 +5,32 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1.Database.LandmarkEntity
 import com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1.Database.LandmarkType
 import com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1.viewmodels.LandmarkViewModel
 class LandmarksActivity : AppCompatActivity() {
-    private lateinit var listView: ListView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: LandmarkViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_landmarks) // Ensure this is your layout with ListView
+        setContentView(R.layout.activity_landmarks)
 
         viewModel = ViewModelProvider(this)[LandmarkViewModel::class.java]
+        recyclerView = findViewById(R.id.recyclerViewLandmarks)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        // Retrieving the landmark type name from the Intent extras
+        val typeName = intent.getStringExtra(EXTRA_LANDMARK_TYPE)
 
-        val type = intent.getStringExtra(EXTRA_LANDMARK_TYPE) // Make sure to pass the type as String
 
-        listView = findViewById(R.id.recyclerViewLandmarks) // Ensure your ListView has this ID
 
         // Observe the LiveData from the ViewModel
-        type?.let { typeName ->
+        typeName?.let {
+            val type = typeName?.let { LandmarkType.valueOf(it) }
             viewModel.getLandmarksByType(typeName).observe(this, { landmarks ->
-
-                val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, landmarks.map { landmark -> "${landmark.name}, ${landmark.address}" })
-                listView.adapter = adapter
+                recyclerView.adapter = LandmarkAdapter(landmarks)
             })
         }
     }

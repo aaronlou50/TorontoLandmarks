@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 enum class LandmarkType(val description: String) {
     OLD_BUILDING("Old Building"),
     MUSEUM("Museum"),
-    STADIUM("Stadium"),
     ATTRACTION("Attraction")
 }
 

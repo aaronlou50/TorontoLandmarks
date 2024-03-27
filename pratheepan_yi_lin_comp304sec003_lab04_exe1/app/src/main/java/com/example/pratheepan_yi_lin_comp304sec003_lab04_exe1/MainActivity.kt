@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         val landmarkTypes = LandmarkType.values()
         val adapter = LandmarkTypeAdapter(landmarkTypes) { landmarkType ->
             val intent = Intent(this, LandmarksActivity::class.java).apply {
-                putExtra(LandmarksActivity.EXTRA_LANDMARK_TYPE, landmarkType)
+                putExtra(LandmarksActivity.EXTRA_LANDMARK_TYPE, landmarkType.name)
             }
             startActivity(intent)
         }
