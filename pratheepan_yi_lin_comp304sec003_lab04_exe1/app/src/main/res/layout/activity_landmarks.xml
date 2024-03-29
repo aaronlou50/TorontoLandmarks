@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".LandmarksActivity">
 
-    <!-- Linear Layout for Landmark Details -->
+
 
     <LinearLayout
         android:id="@+id/linearLayoutLandmarkDetails"
