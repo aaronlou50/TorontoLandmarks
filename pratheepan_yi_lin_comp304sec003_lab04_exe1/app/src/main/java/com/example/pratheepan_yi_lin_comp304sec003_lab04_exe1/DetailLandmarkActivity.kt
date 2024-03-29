@@ -2,6 +2,7 @@ package com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1
 
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1.Database.LandmarkEntity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
+
 class DetailLandmarkActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
@@ -21,7 +23,8 @@ class DetailLandmarkActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_landmark)
 
-        landmark = intent.getParcelableExtra("EXTRA_LANDMARK")!!
+        landmark = intent.getParcelableExtra("EXTRA_LANDMARK") ?: return
+
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment

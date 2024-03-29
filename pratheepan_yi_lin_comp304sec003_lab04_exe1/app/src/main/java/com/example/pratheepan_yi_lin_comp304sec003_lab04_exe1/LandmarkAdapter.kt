@@ -7,8 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1.Database.LandmarkEntity
 
-class LandmarkAdapter(private val landmarks: List<LandmarkEntity>) :
-    RecyclerView.Adapter<LandmarkAdapter.ViewHolder>() {
+class LandmarkAdapter(
+    private var landmarks: List<LandmarkEntity>,
+    private val onClick: (LandmarkEntity) -> Unit
+) : RecyclerView.Adapter<LandmarkAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameTextView: TextView = view.findViewById(R.id.textViewLandmarkName)
@@ -24,10 +26,18 @@ class LandmarkAdapter(private val landmarks: List<LandmarkEntity>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val landmark = landmarks[position]
-        holder.nameTextView.text = landmark.name
-        holder.addressTextView.text = landmark.address
-        holder.typeTextView.text = landmark.type
+        with(holder) {
+            nameTextView.text = landmark.name
+            addressTextView.text = landmark.address
+            typeTextView.text = landmark.type
+            itemView.setOnClickListener { onClick(landmark) }
+        }
     }
 
     override fun getItemCount() = landmarks.size
+
+    fun updateData(newLandmarks: List<LandmarkEntity>) {
+        landmarks = newLandmarks
+        notifyDataSetChanged()
+    }
 }
