@@ -3,6 +3,7 @@ package com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pratheepan_yi_lin_comp304sec003_lab04_exe1.Database.LandmarkEntity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,12 +30,20 @@ class DetailLandmarkActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        val toggleButton = findViewById<Button>(R.id.button_toggle_map)
+        toggleButton.setOnClickListener {
+            map.mapType = if (map.mapType == GoogleMap.MAP_TYPE_NORMAL) {
+                GoogleMap.MAP_TYPE_SATELLITE
+            } else {
+                GoogleMap.MAP_TYPE_NORMAL
+            }
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
-        val address = landmark.address // Ensure your Landmark class has an 'address' property
+        map.mapType = GoogleMap.MAP_TYPE_NORMAL
+        val address = landmark.address
         val geocoder = Geocoder(this)
         try {
             val addressList = geocoder.getFromLocationName(address, 1)
@@ -47,6 +56,7 @@ class DetailLandmarkActivity : AppCompatActivity(), OnMapReadyCallback {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+
     }
 }
 
