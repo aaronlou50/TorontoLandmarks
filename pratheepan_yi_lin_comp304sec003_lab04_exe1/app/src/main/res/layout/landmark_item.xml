@@ -17,27 +17,27 @@
         android:id="@+id/textViewLandmarkName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_weight="1"
-        android:textStyle="bold"
+
         android:gravity="center_horizontal"
         tools:text="Landmark Name"/>
     <TextView
         android:id="@+id/textViewLandmarkAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_weight="1"
-        android:textStyle="bold"
+
         android:gravity="center_horizontal"
         tools:text="Landmark Address"/>
     <TextView
         android:id="@+id/textViewLandmarkType"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_weight="1"
-        android:textStyle="bold"
+
         android:gravity="end"
         tools:text="Landmark Address"/>
 
